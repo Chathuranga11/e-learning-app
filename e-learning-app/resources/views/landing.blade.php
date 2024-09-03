@@ -39,7 +39,7 @@
     <div class="main-container">
         <img src="{{ asset('images/logo.png') }}" alt="NC Labs Logo" class="logo">
         <div class="mt-5">
-            <a href="#" class="btn btn-danger btn-custom">Login</a>
+            <a href="{{ url('/login') }}" class="btn btn-danger btn-custom">Login</a>
             <a href="{{ url('/register') }}" class="btn btn-warning btn-custom">Register</a>
         </div>
         <div class="footer-text">

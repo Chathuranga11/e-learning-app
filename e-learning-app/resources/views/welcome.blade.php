@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Tutorial Services - Register</title>
+    <title>Digital Tutorial Services</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -34,13 +34,13 @@
 <body>
     <div class="main-container">
         <img src="{{ asset('images/logo.png') }}" alt="NC Labs Logo" class="mb-4" style="width: 80px;">
-        <h1>NC Education - NC Tutorial Services</h1>
+        <h1>Online ටියුටරිය</h1>
         <div class="mt-5">
-            <a href="{{ url('/register/teacher') }}" class="btn btn-danger btn-custom">Teacher</a>
-            <a href="{{ url('/register/student') }}" class="btn btn-warning btn-custom">Student</a>
+            <a href="#" class="btn btn-danger btn-custom">Teacher</a>
+            <a href="#" class="btn btn-warning btn-custom">Student</a>
         </div>
         <div class="mt-5">
-            <h4>Registered students <span style="color:red;">xxxxxxxxxx</strong></span></h4>
+            <h4>Registered students <span style="color:red;">95,000</span></h4>
         </div>
         <div class="footer-text">
             <p>If a teacher has offered a free lesson, you can click the above button to visit the classroom.</p>
