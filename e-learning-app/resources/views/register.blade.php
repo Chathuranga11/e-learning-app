@@ -34,10 +34,10 @@
 <body>
     <div class="main-container">
         <img src="{{ asset('images/logo.png') }}" alt="NC Labs Logo" class="mb-4" style="width: 80px;">
-        <h1>NC Labs Digital Tutorial Services</h1>
+        <h1>NC Education - NC Tutorial Services</h1>
         <div class="mt-5">
-            <a href="#" class="btn btn-danger btn-custom">Teacher</a>
-            <a href="#" class="btn btn-warning btn-custom">Student</a>
+            <a href="{{ url('/register/teacher') }}" class="btn btn-danger btn-custom">Teacher</a>
+            <a href="{{ url('/register/student') }}" class="btn btn-warning btn-custom">Student</a>
         </div>
         <div class="mt-5">
             <h4>Registered students <span style="color:red;">95,000</span></h4>

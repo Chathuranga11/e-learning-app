@@ -19,6 +19,10 @@
             max-width: 800px;
             border-radius: 10px;
         }
+        .logo {
+            width: 150px; /* Increase the logo size */
+            margin-bottom: 20px;
+        }
         .btn-custom {
             padding: 15px 30px;
             font-size: 18px;
@@ -33,8 +37,7 @@
 </head>
 <body>
     <div class="main-container">
-        <img src="{{ asset('images/logo.png') }}" alt="NC Labs Logo" class="mb-4" style="width: 80px;">
-        <h1>Welcome to NC Labs Digital Tutorial Services</h1>
+        <img src="{{ asset('images/logo.png') }}" alt="NC Labs Logo" class="logo">
         <div class="mt-5">
             <a href="#" class="btn btn-danger btn-custom">Login</a>
             <a href="{{ url('/register') }}" class="btn btn-warning btn-custom">Register</a>

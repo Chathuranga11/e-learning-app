@@ -13,3 +13,7 @@ Route::get('/register', function () {
 Route::get('/register/student', function () {
     return view('student-registration');
 });
+
+Route::get('/register/teacher', function () {
+    return view('teacher-registration');
+});
