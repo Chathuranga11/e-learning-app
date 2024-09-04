@@ -31,6 +31,12 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::middleware(['auth', 'active'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
 
 // Routes for Student Registration
 Route::get('/register/student', [StudentController::class, 'create'])->name('student.register');

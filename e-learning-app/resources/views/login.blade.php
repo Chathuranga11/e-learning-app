@@ -87,26 +87,33 @@
             <form method="POST" action="{{ route('login.attempt') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="email">Email Id:</label>
-                    <div class="input-group">
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
-                        <span class="input-group-text">
-                            <img src="{{ asset('images/email-icon.png') }}" alt="Email Icon" class="icon">
-                        </span>
-                    </div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-3">
                     <label for="password">Password:</label>
-                    <div class="input-group">
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
-                        <span class="input-group-text">
-                            <img src="{{ asset('images/password-icon.png') }}" alt="Password Icon" class="icon">
-                        </span>
-                    </div>
+                    <input type="password" id="password" name="password" class="form-control" required>
                 </div>
-                <a href="#" class="text-right d-block mb-3">Forgot password?</a>
-                <button type="submit" class="login-btn">Login Now</button>
+                <!-- Dropdown for User Type -->
+                <div class="form-group mt-3">
+                    <label for="user_type">Select User Type:</label>
+                    <select id="user_type" name="user_type" class="form-control" required>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+                <!-- Error message (if any) -->
+                @if(session('error'))
+                    <div class="alert alert-danger mt-3">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </form>
+            
             <div class="text-center mt-3">OR</div>
             <a href="{{ url('/register') }}" class="register-btn">Register Now</a>
         </div>
