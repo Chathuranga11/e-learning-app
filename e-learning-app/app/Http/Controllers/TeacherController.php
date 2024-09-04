@@ -38,9 +38,10 @@ class TeacherController extends Controller
             'password' => bcrypt($request->password),
             'subjects' => $request->subjects,
             'city' => $request->city,
+            'is_active' => false,  // Set Admin as disabled by default
         ]);
 
         // Redirect to the login page with a success message
-        return redirect()->route('login')->with('success', 'Successfully registered! Please log in.');
+        return redirect()->route('login')->with('success', 'Teacher registered successfully. Please log in once activated.');
     }
 }

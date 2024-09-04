@@ -44,9 +44,10 @@ class AdminController extends Controller
             'password' => Hash::make($request->password), // Encrypt the password
             'address' => $request->address,
             'city' => $request->city,
+            'is_active' => false,  // Set Admin as disabled by default
         ]);
 
         // Redirect to login with success message
-        return redirect()->route('login')->with('success', 'Admin registered successfully. Please log in.');
+        return redirect()->route('login')->with('success', 'Admin registered successfully. Please log in once activated.');
     }
 }

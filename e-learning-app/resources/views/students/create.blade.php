@@ -130,13 +130,6 @@
                 valid = false;
             }
 
-            // Password validation
-            const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{6,15}$/;
-            if (!passwordRegex.test(passwordField.value)) {
-                alert('Password must be between 6 and 15 characters, and include at least one uppercase letter, one lowercase letter, and one number.');
-                valid = false;
-            }
-
             // Password match validation
             if (passwordField.value !== confirmPasswordField.value) {
                 alert('Passwords do not match.');

@@ -37,9 +37,9 @@ class StudentController extends Controller
             'password' => Hash::make($request->password), // Hash the password before saving
             'school_name' => $request->school_name,
             'city' => $request->city,
+            'is_active' => true,  // Set Student as activated by default
         ]);
 
-        // Redirect to the login page with a success message
-        return redirect()->route('login')->with('success', 'Successfully registered! Please log in.');
+        return redirect()->route('login')->with('success', 'Student registered successfully.');
     }
 }
