@@ -11,7 +11,7 @@ class StudentController extends Controller
     // Display the student registration form
     public function create()
     {
-        return view('students.register');
+        return view('students.create');
     }
 
     // Handle the student registration form submission

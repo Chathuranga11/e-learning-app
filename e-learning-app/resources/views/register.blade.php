@@ -38,6 +38,7 @@
         <div class="mt-5">
             <a href="{{ url('/register/teacher') }}" class="btn btn-danger btn-custom">Teacher</a>
             <a href="{{ url('/register/student') }}" class="btn btn-warning btn-custom">Student</a>
+            <a href="{{ route('admin.register') }}" class="btn btn-danger btn-custom">Admin</a>
         </div>
         <div class="mt-5">
             <h4>Registered students <span style="color:red;">xxxxxxxxxx</strong></span></h4>
