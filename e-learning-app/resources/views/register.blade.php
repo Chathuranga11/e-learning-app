@@ -37,7 +37,7 @@
         <h1>NC Education - NC Tutorial Services</h1>
         <div class="mt-5">
             <a href="{{ url('/register/teacher') }}" class="btn btn-danger btn-custom">Teacher</a>
-            <a href="{{ url('/register/student') }}" class="btn btn-warning btn-custom">Student</a>
+            <a href="{{ route('student.register') }}" class="btn btn-warning btn-custom">Student</a>
             <a href="{{ route('admin.register') }}" class="btn btn-danger btn-custom">Admin</a>
         </div>
         <div class="mt-5">
