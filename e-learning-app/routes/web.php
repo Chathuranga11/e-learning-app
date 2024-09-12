@@ -5,6 +5,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SubjectController;
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
 Route::get('/register/student', [StudentController::class, 'create'])->name('student.register');
@@ -36,6 +37,11 @@ Route::middleware(['auth', 'active'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('subjects', SubjectController::class);
+});
+
 
 
 // Routes for Student Registration
