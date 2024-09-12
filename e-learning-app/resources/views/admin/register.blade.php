@@ -52,51 +52,53 @@
             <h1>Admin Registration</h1>
         </div>
         <div class="form-container">
-            <form id="adminRegistrationForm">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="first_name">First Name :</label>
-                        <input type="text" id="first_name" name="first_name" placeholder="Enter your first name.." required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="last_name">Last Name :</label>
-                        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name.." required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="email">Email Id :</label>
-                        <input type="email" id="email" name="email" placeholder="info@xyz.com" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="mobile">WhatsApp Mobile No. :</label>
-                        <input type="text" id="mobile" name="mobile" placeholder="+94 71 999 8888" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="password">Password :</label>
-                        <input type="password" id="password" name="password" placeholder="xxxxxxxxxx" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="confirm_password">Confirm Password :</label>
-                        <input type="password" id="confirm_password" name="confirm_password" placeholder="xxxxxxxxxx" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="address">Address :</label>
-                        <input type="text" id="address" name="address" placeholder="Enter the Address" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="city">City :</label>
-                        <input type="text" id="city" name="city" placeholder="Enter closest city" required>
-                    </div>
-                </div>
-                <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-warning btn-custom">Register</button>
-                </div>
-            </form>
+            <form id="adminRegistrationForm" action="{{ route('admin.store') }}" method="POST">
+    @csrf  <!-- This will include the CSRF token -->
+    <div class="row">
+        <div class="col-md-6">
+            <label for="first_name">First Name :</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Enter your first name.." required>
+        </div>
+        <div class="col-md-6">
+            <label for="last_name">Last Name :</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Enter your last name.." required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="email">Email Id :</label>
+            <input type="email" id="email" name="email" placeholder="info@xyz.com" required>
+        </div>
+        <div class="col-md-6">
+            <label for="mobile">WhatsApp Mobile No. :</label>
+            <input type="text" id="mobile" name="mobile" placeholder="+94 71 999 8888" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="password">Password :</label>
+            <input type="password" id="password" name="password" placeholder="xxxxxxxxxx" required>
+        </div>
+        <div class="col-md-6">
+            <label for="confirm_password">Confirm Password :</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="xxxxxxxxxx" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="address">Address :</label>
+            <input type="text" id="address" name="address" placeholder="Enter the Address" required>
+        </div>
+        <div class="col-md-6">
+            <label for="city">City :</label>
+            <input type="text" id="city" name="city" placeholder="Enter closest city" required>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-warning btn-custom">Register</button>
+    </div>
+</form>
+
         </div>
         <div class="footer-text">
             <p>All rights reserved for NC Labs © 2024</p>
@@ -107,47 +109,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS for validation -->
     <script>
-        document.getElementById('adminRegistrationForm').addEventListener('submit', function(event) {
-            let valid = true;
+document.getElementById('adminRegistrationForm').addEventListener('submit', function(event) {
+    let valid = true;
 
-            // Get form fields
-            const emailField = document.getElementById('email');
-            const mobileField = document.getElementById('mobile');
-            const passwordField = document.getElementById('password');
-            const confirmPasswordField = document.getElementById('confirm_password');
+    // Get form fields
+    const emailField = document.getElementById('email');
+    const mobileField = document.getElementById('mobile');
+    const passwordField = document.getElementById('password');
+    const confirmPasswordField = document.getElementById('confirm_password');
 
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailField.value)) {
-                alert('Please enter a valid email address.');
-                valid = false;
-            }
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailField.value)) {
+        alert('Please enter a valid email address.');
+        valid = false;
+    }
 
-            // Mobile number validation
-            const mobileRegex = /^(07|00947|\+947)\d{8}$/;
-            if (!mobileRegex.test(mobileField.value)) {
-                alert('Please enter a valid WhatsApp mobile number starting with 07, 00947, or +947 followed by 8 digits.');
-                valid = false;
-            }
+    // Mobile number validation
+    const mobileRegex = /^(07|00947|\+947)\d{8}$/;
+    if (!mobileRegex.test(mobileField.value)) {
+        alert('Please enter a valid WhatsApp mobile number starting with 07, 00947, or +947 followed by 8 digits.');
+        valid = false;
+    }
 
-            // Password validation
-            const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{6,15}$/;
-            if (!passwordRegex.test(passwordField.value)) {
-                alert('Password must be between 6 and 15 characters, and include at least one uppercase letter, one lowercase letter, and one number.');
-                valid = false;
-            }
+    // Password validation
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{6,15}$/;
+    if (!passwordRegex.test(passwordField.value)) {
+        alert('Password must be between 6 and 15 characters, and include at least one uppercase letter, one lowercase letter, and one number.');
+        valid = false;
+    }
 
-            // Password match validation
-            if (passwordField.value !== confirmPasswordField.value) {
-                alert('Passwords do not match.');
-                valid = false;
-            }
+    // Password match validation
+    if (passwordField.value !== confirmPasswordField.value) {
+        alert('Passwords do not match.');
+        valid = false;
+    }
 
-            // Prevent form submission if validation fails
-            if (!valid) {
-                event.preventDefault();
-            }
-        });
+    // Prevent form submission if validation fails
+    if (!valid) {
+        event.preventDefault();
+    }
+});
     </script>
 </body>
 </html>

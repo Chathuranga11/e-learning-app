@@ -20,7 +20,7 @@ class AdminController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:admins',
-            'mobile' => 'required|string|regex:/^(\+947|07|00947)[0-9]{8}$/',
+            'mobile' => 'required|string|max:255',
             'password' => [
                 'required',
                 'string',

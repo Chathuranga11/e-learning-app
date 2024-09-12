@@ -7,11 +7,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SubjectController;
 
-Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
-Route::get('/register/student', [StudentController::class, 'create'])->name('student.register');
-
-
-
 Route::get('/', function () {
     return view('landing');
 });
@@ -42,7 +37,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('subjects', SubjectController::class);
 });
 
-
+Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
+Route::get('/register/student', [StudentController::class, 'create'])->name('student.register');
 
 // Routes for Student Registration
 Route::get('/register/student', [StudentController::class, 'create'])->name('student.register');
@@ -55,3 +51,6 @@ Route::post('/register/teacher', [TeacherController::class, 'store'])->name('tea
 // Route for admin registration
 Route::get('/register/admin', [AdminController::class, 'create'])->name('admin.register');
 Route::post('/register/admin', [AdminController::class, 'store'])->name('admin.store');
+
+Route::get('/teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
+Route::post('/teachers', [TeacherController::class, 'store'])->name('teachers.store');

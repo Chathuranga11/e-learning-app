@@ -9,7 +9,7 @@ class AddSubjectIdToTeachersTable extends Migration
     public function up()
     {
         Schema::table('teachers', function (Blueprint $table) {
-            $table->unsignedBigInteger('subject_id')->nullable(); // Add the subject_id column
+            $table->unsignedBigInteger('subject_id')->nullable(); // Add subject_id column
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('set null'); // Foreign key to subjects table
         });
     }

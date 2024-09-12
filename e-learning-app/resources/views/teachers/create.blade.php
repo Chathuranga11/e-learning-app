@@ -36,7 +36,7 @@
         .form-container label {
             color: #FFA500;
         }
-        .form-container input {
+        .form-container input, .form-container select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -52,7 +52,8 @@
             <h1>Teacher Registration</h1>
         </div>
         <div class="form-container">
-            <form id="teacherRegistrationForm">
+            <form id="teacherRegistrationForm" action="{{ route('teachers.store') }}" method="POST">
+                @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <label for="first_name">First Name :</label>
@@ -85,8 +86,13 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="subjects">Subjects :</label>
-                        <input type="text" id="subjects" name="subjects" placeholder="Enter the subjects you teach" required>
+                        <label for="subject_id">Subject:</label>
+                        <select id="subject_id" name="subject_id" class="form-control" required>
+                            <option value="">Select a subject</option>
+                            @foreach($subjects as $subject)
+                                <option value="{{ $subject->id }}">{{ $subject->name }}</option> <!-- Dropdown populated with subjects -->
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label for="city">City :</label>
