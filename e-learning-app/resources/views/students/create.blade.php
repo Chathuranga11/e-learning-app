@@ -52,7 +52,7 @@
             <h1>Student Registration</h1>
         </div>
         <div class="form-container">
-            <form id="registrationForm">
+            <form id="registrationForm" action="{{ route('students.store') }}" method="POST">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="first_name">First Name :</label>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="confirm_password">Confirm Password :</label>
-                        <input type="password" id="confirm_password" name="confirm_password" placeholder="xxxxxxxxxx" required>
+                        <input type="password" id="confirm_password" name="password_confirmation" placeholder="xxxxxxxxxx" required>
                     </div>
                 </div>
                 <div class="row">

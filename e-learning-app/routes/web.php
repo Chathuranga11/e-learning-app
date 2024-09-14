@@ -37,12 +37,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('subjects', SubjectController::class);
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('students.dashboard');
+});
+
 Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
 Route::get('/register/student', [StudentController::class, 'create'])->name('student.register');
 
 // Routes for Student Registration
-Route::get('/register/student', [StudentController::class, 'create'])->name('student.register');
-Route::post('/register/student', [StudentController::class, 'store'])->name('student.store');
+Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
+Route::post('/students', [StudentController::class, 'store'])->name('students.store');
 
 // Routes for Teacher Registration
 Route::get('/register/teacher', [TeacherController::class, 'create'])->name('teacher.register');

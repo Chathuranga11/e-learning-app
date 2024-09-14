@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -23,8 +24,8 @@ class StudentController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:students',
             'mobile' => 'required|string|max:15',
-            'password' => 'required|string|confirmed|min:6',
-            'school_name' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'school' => 'required|string|max:255',
             'city' => 'required|string|max:255',
         ]);
 
@@ -34,12 +35,24 @@ class StudentController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'mobile' => $request->mobile,
-            'password' => Hash::make($request->password), // Hash the password before saving
-            'school_name' => $request->school_name,
+            'password' => Hash::make($request->password),
+            'school' => $request->school,
             'city' => $request->city,
-            'is_active' => true,  // Set Student as activated by default
+            'is_active' => true,
         ]);
 
         return redirect()->route('login')->with('success', 'Student registered successfully.');
+    }
+
+    // Display the student dashboard
+    public function dashboard()
+    {
+        // Get the authenticated student
+        $student = Auth::user();
+
+        // Retrieve any posts or lessons to display on the dashboard
+        $posts = []; // Replace this with actual data retrieval logic
+
+        return view('students.dashboard', compact('student', 'posts'));
     }
 }
