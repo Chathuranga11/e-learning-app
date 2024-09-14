@@ -30,6 +30,7 @@ class Teacher extends Authenticatable
         'email',
         'mobile',
         'password',
+        'subject_id',
         'address',
         'city',
         'is_active',

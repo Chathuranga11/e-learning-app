@@ -53,6 +53,7 @@
         </div>
         <div class="form-container">
             <form id="registrationForm" action="{{ route('students.store') }}" method="POST">
+                @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <label for="first_name">First Name :</label>

@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('landing');
@@ -44,6 +45,9 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
 Route::get('/register/student', [StudentController::class, 'create'])->name('student.register');
 
+
+Route::post('/login', [LoginController::class, 'login'])->name('login.attempt');
+
 // Routes for Student Registration
 Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
 Route::post('/students', [StudentController::class, 'store'])->name('students.store');
@@ -58,3 +62,8 @@ Route::post('/register/admin', [AdminController::class, 'store'])->name('admin.s
 
 Route::get('/teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
 Route::post('/teachers', [TeacherController::class, 'store'])->name('teachers.store');
+
+Route::get('/students/dashboard', [StudentController::class, 'dashboard'])->name('students.dashboard');
+Route::get('/teachers/dashboard', [TeacherController::class, 'dashboard'])->name('teachers.dashboard');
+Route::get('/admins/dashboard', [AdminController::class, 'dashboard'])->name('admins.dashboard');
+

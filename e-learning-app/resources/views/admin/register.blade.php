@@ -53,7 +53,7 @@
         </div>
         <div class="form-container">
             <form id="adminRegistrationForm" action="{{ route('admin.store') }}" method="POST">
-    @csrf  <!-- This will include the CSRF token -->
+    @csrf  
     <div class="row">
         <div class="col-md-6">
             <label for="first_name">First Name :</label>

@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Auth;
 class CheckIfActive
 {
     public function handle($request, Closure $next)
-    {
-        $user = Auth::user();
-        if ($user && !$user->is_active) {
-            Auth::logout();
-            return redirect()->route('login')->with('error', 'Your account is inactive.');
-        }
+            {
+                $guard = session('auth.guard', 'web'); // Default to 'web' if not set
+                $user = Auth::guard($guard)->user();
+                if ($user && !$user->is_active) {
+                    Auth::guard($guard)->logout();
+                    return redirect()->route('login')->with('error', 'Your account is inactive.');
+                }
 
-        return $next($request);
-    }
+                return $next($request);
+            }
 }
