@@ -7,6 +7,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\TimetableController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('landing');
@@ -67,3 +73,29 @@ Route::get('/students/dashboard', [StudentController::class, 'dashboard'])->name
 Route::get('/teachers/dashboard', [TeacherController::class, 'dashboard'])->name('teachers.dashboard');
 Route::get('/admins/dashboard', [AdminController::class, 'dashboard'])->name('admins.dashboard');
 
+// Route for student dashboard
+Route::get('/students/dashboard', [StudentController::class, 'dashboard'])->name('students.dashboard');
+
+// Notifications
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+
+// My Cart
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+// Filter Teacher
+Route::get('/filter-teacher', [TeacherController::class, 'filter'])->name('filter.teacher');
+
+// Tutory Time Table
+Route::get('/tutory-timetable', [TimetableController::class, 'index'])->name('timetable');
+
+// Active Lesson
+Route::get('/active-lesson', [LessonController::class, 'active'])->name('active.lesson');
+
+// Video On Demand
+Route::get('/video-on-demand', [VideoController::class, 'index'])->name('video.on.demand');
+
+// My Profile
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+// Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

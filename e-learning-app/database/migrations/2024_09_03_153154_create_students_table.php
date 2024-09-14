@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +14,9 @@ class CreateStudentsTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile');
             $table->string('password');
-            $table->string('school_name');
+            $table->string('school')->nullable();
             $table->string('city');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

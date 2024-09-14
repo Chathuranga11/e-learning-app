@@ -86,13 +86,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="subject_id">Subject:</label>
-                        <select id="subject_id" name="subject_id" class="form-control" required>
-                            <option value="">Select a subject</option>
-                            @foreach($subjects as $subject)
-                                <option value="{{ $subject->id }}">{{ $subject->name }}</option> <!-- Dropdown populated with subjects -->
-                            @endforeach
-                        </select>
+                        <label for="subject_id">Subjects:</label>
+        <select name="subject_id" id="subject_id" class="form-control" required>
+            @foreach ($subjects as $subject)
+                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+            @endforeach
+        </select>
                     </div>
                     <div class="col-md-6">
                         <label for="city">City :</label>

@@ -44,7 +44,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->password), // Encrypt the password
             'address' => $request->address,
             'city' => $request->city,
-            'is_active' => false,  // Set Admin as disabled by default
+            'is_active' => true,  // Set Admin as disabled by default
         ]);
 
         // Redirect to login with success message

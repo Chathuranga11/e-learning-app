@@ -23,31 +23,36 @@ class TeacherController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validate and save the teacher's data
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:teachers',
-            'mobile' => 'required|string|max:15',
-            'password' => 'required|string|confirmed|min:6',
-            'subject_id' => 'required|exists:subjects,id',  // Validate that a valid subject is selected
-            'city' => 'required|string|max:255',
-        ]);
+{
+    $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:teachers',
+        'mobile' => 'required|string|max:15',
+        'password' => 'required|string|confirmed|min:6',
+        'subject_id' => 'required|exists:subjects,id',
+        'city' => 'required|string|max:255',
+    ]);
 
-        // Create the teacher with the selected subject_id
-        Teacher::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'mobile' => $request->mobile,
-            'password' => bcrypt($request->password),
-            'subject_id' => $request->subject_id,  // Store the selected subject_id
-            'city' => $request->city,
-            'is_active' => false,  // Set the teacher as disabled by default
-        ]);
+    Teacher::create([
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'email' => $request->email,
+        'mobile' => $request->mobile,
+        'password' => bcrypt($request->password),
+        'subject_id' => $request->subject_id,
+        'city' => $request->city,
+        'is_active' => true,
+    ]);
 
-        // Redirect to the login page with a success message
-        return redirect()->route('login')->with('success', 'Teacher registered successfully. Please log in once activated.');
-    }
+    return redirect()->route('login')->with('success', 'Teacher registered successfully. Please log in once activated.');
 }
+// Filter teachers for the student
+public function filter()
+{
+    $teachers = Teacher::all(); // Example of fetching all teachers
+    return view('teachers.filter', compact('teachers'));
+}
+
+}
+
