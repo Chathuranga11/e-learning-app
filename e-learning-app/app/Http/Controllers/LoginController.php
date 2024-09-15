@@ -43,5 +43,14 @@ public function login(Request $request)
     // Authentication failed
     return redirect()->back()->with('error', 'Invalid credentials or account type.');
 }
+// Logout method
+public function logout(Request $request)
+{
+    Auth::guard('student')->logout(); // Use 'student' guard if you have multiple guards
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('login'); // Redirect to the login page
+}
 
 }
