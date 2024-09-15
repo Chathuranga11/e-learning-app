@@ -7,18 +7,48 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-// class Teacher extends Model
-// {
-//     use HasFactory;
+class Lesson extends Model
+{
+    use HasFactory;
 
-//     protected $fillable = ['first_name', 'last_name', 'email', 'mobile', 'password', 'subjects', 'city'];
+    protected $fillable = [
+        'lesson_name',
+        'lesson_description',
+        'lesson_date',
+        'lesson_duration',
+        'lesson_fee',
+        'lesson_id',
+        'teacher_id',
+        'subject_id',
+    ];
 
-//     // Example relationship with courses (if exists)
-//     //public function courses()
-//     //{
-//     //   return $this->hasMany(Course::class);
-//     //}
-// }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($teacher) {
+            $latestTeacher = self::orderBy('created_at', 'desc')->first();
+            $lastId = ($latestTeacher && $latestTeacher->teacher_id) ? intval(substr($latestTeacher->teacher_id, 3)) : 0;
+            $teacher->teacher_id = 'THR' . str_pad($lastId + 1, 3, '0', STR_PAD_LEFT);
+        });
+    }
+
+    // Add the primary key as teacher_id for the model
+    protected $primaryKey = 'teacher_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+}
+
 
 class Teacher extends Authenticatable
 {

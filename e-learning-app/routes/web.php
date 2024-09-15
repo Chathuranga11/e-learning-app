@@ -107,7 +107,7 @@ Route::get('/payment/complete', [PaymentController::class, 'complete'])->name('p
 Route::middleware(['auth:teacher'])->group(function () {
     Route::get('/teacher/notifications', [TeacherController::class, 'notifications'])->name('notifications');
     Route::get('/teacher/my-wall', [TeacherController::class, 'myWall'])->name('my.wall');
-    Route::get('/teacher/publish-class', [TeacherController::class, 'publishClass'])->name('publish.new.class');
+    //Route::get('/teacher/publish-class', [TeacherController::class, 'publishClass'])->name('publish.new.class');
     Route::get('/teacher/tutory-timetable', [TeacherController::class, 'tutoryTimetable'])->name('tutory.timetable');
     Route::get('/teacher/published-lessons', [TeacherController::class, 'publishedLessons'])->name('published.lessons');
     Route::get('/teacher/registry', [TeacherController::class, 'registry'])->name('go.registry');
@@ -121,5 +121,9 @@ Route::middleware(['auth:teacher'])->group(function () {
 Route::middleware(['auth:teacher'])->group(function () {
     Route::get('/teacher/profile', [TeacherController::class, 'profile'])->name('teacher.profile');
     Route::put('/teacher/profile', [TeacherController::class, 'updateProfile'])->name('teacher.profile.update');
+    Route::get('/teacher/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
+    Route::post('/teacher/lessons', [LessonController::class, 'store'])->name('lessons.store');
+    Route::get('/teacher/published-lessons', [LessonController::class, 'index'])->name('lessons.index');
+Route::put('/teacher/published-lessons', [LessonController::class, 'update'])->name('lessons.update');
 });
 

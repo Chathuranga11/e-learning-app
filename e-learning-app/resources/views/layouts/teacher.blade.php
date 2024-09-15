@@ -106,13 +106,13 @@
                         <a class="nav-link" href="{{ route('teacher.dashboard') }}">My Wall</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('publish.new.class') }}">Publish a New Class</a>
+                        <a class="nav-link" href="{{ route('lessons.create') }}">Publish a New Class</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('tutory.timetable') }}">Tutory Time Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('published.lessons') }}">Published Lessons</a>
+                        <a class="nav-link" href="{{ route('lessons.index') }}">Published Lessons</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('go.registry') }}">Go to Registry</a>
