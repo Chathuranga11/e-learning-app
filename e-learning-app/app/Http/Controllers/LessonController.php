@@ -84,5 +84,39 @@ public function update(Request $request, $id)
     return redirect()->route('lessons.index')->with('success', 'Lesson updated successfully');
 }
 
+public function purchaseLesson(Request $request, $lessonId)
+{
+    $studentId = auth('student')->user()->id;
+
+    // Create a purchase
+    $latestPurchase = Purchase::orderBy('created_at', 'desc')->first();
+    $lastPurchaseId = ($latestPurchase && $latestPurchase->purchase_id) ? intval(substr($latestPurchase->purchase_id, 3)) : 0;
+    $customPurchaseId = 'PRC' . str_pad($lastPurchaseId + 1, 4, '0', STR_PAD_LEFT);
+
+    Purchase::create([
+        'purchase_id' => $customPurchaseId,
+        'student_id' => $studentId,
+        'lesson_id' => $lessonId,
+    ]);
+
+    return redirect()->route('students.active_lessons')->with('success', 'Lesson purchased successfully.');
+}
+
+public function showActiveLessons()
+{
+    // Retrieve all active lessons (assuming 'lesson_date' is in the future)
+    $lessons = Lesson::where('lesson_date', '>=', now())->get();
+
+    // Return the view with the active lessons
+    return view('lessons.active', compact('lessons'));
+}
+
+// Method to handle the lesson purchase
+public function purchase(Request $request, $lessonId)
+{
+    // Implement your purchase logic here (e.g., save the purchase to the database)
+    // Redirect to a success page or show a success message
+    return redirect()->back()->with('success', 'Lesson purchased successfully!');
+}
 
 }

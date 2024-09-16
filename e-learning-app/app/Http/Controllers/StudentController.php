@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Subject;
+use App\Http\Controllers\Purchase;
 
 class StudentController extends Controller
 {
@@ -55,4 +57,15 @@ class StudentController extends Controller
 
         return view('students.dashboard', compact('student', 'posts'));
     }
+
+    public function activeLessons()
+{
+    $studentId = auth('student')->user()->id;
+    $activeLessons = Purchase::where('student_id', $studentId)->with('lesson')->get();
+
+    return view('students.active-lessons', compact('activeLessons'));
+}
+
+
+
 }

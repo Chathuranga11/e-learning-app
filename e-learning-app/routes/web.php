@@ -80,7 +80,7 @@ Route::get('/students/dashboard', [StudentController::class, 'dashboard'])->name
 // Student Side Bar
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::get('/filter-teacher', [TeacherController::class, 'filter'])->name('filter.teacher');
+//Route::get('/filter-teacher', [TeacherController::class, 'filter'])->name('filter.teacher');
 Route::get('/tutory-timetable', [TimetableController::class, 'index'])->name('timetable');
 Route::get('/active-lesson', [LessonController::class, 'active'])->name('active.lesson');
 Route::get('/video-on-demand', [VideoController::class, 'index'])->name('video.on.demand');
@@ -126,4 +126,30 @@ Route::middleware(['auth:teacher'])->group(function () {
     Route::get('/teacher/published-lessons', [LessonController::class, 'index'])->name('lessons.index');
 Route::put('/teacher/published-lessons', [LessonController::class, 'update'])->name('lessons.update');
 });
+
+// Student Routes
+Route::post('/lessons/{lesson}/purchase', [LessonController::class, 'purchaseLesson'])->name('lessons.purchase');
+Route::get('/students/active-lessons', [StudentController::class, 'activeLessons'])->name('students.active_lessons');
+
+// Teacher Routes
+Route::get('/lessons/{lesson}/purchased-students', [TeacherController::class, 'studentsWhoPurchased'])->name('teachers.purchased_students');
+
+// Teacher Routes
+Route::put('/teachers/update-lesson/{lesson}', [LessonController::class, 'updateLesson'])->name('teachers.update_lesson');
+Route::get('/lessons/{lesson}/students', [TeacherController::class, 'studentsWhoPurchased'])->name('teachers.purchased_students');
+
+Route::get('/lessons/{lesson}/students', [TeacherController::class, 'studentsWhoPurchased'])->name('teachers.purchased_students');
+
+Route::get('/filter-teacher', [TeacherController::class, 'showFilterTeacherPage'])->name('filter.teacher');
+Route::post('/get-teacher-lessons', [TeacherController::class, 'getTeacherLessons'])->name('get.teacher.lessons');
+
+Route::get('/search-teachers', [TeacherController::class, 'searchTeachers'])->name('search.teachers');
+Route::post('/get-teacher-lessons', [TeacherController::class, 'getTeacherLessons'])->name('get.teacher.lessons');
+
+
+// Route to show active lessons
+Route::get('/lessons/active', [LessonController::class, 'showActiveLessons'])->name('lessons.active');
+
+// Route to handle lesson purchase
+Route::post('/lessons/purchase/{lesson}', [LessonController::class, 'purchase'])->name('lessons.purchase');
 

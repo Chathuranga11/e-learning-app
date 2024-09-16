@@ -60,4 +60,13 @@ class SubjectController extends Controller
 
         return redirect()->route('subjects.index')->with('success', 'Subject deleted successfully');
     }
+
+    public function showFilterTeacherPage()
+{
+    // Fetch all subjects from the database
+    $subjects = Subject::all();
+
+    // Pass the subjects to the view
+    return view('teachers.filter', compact('subjects'));
+}
 }

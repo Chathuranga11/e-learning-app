@@ -112,7 +112,7 @@
                         <a class="nav-link" href="{{ route('timetable') }}">Tutory Time Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('active.lesson') }}">Active Lesson</a>
+                        <a class="nav-link" href="{{ route('lessons.active') }}">Active Lessons</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('video.on.demand') }}">Video On Demand</a>

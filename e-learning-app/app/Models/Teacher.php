@@ -81,5 +81,10 @@ class Subject extends Model
             $subject->subject_id = 'SUB' . str_pad($nextId, 2, '0', STR_PAD_LEFT);
         });
     }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class, 'teacher_id', 'teacher_id');
+    }
 }
 

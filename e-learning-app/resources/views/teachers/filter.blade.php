@@ -10,7 +10,7 @@
             <div class="mb-3">
                 <label for="subject" class="form-label">Select Subject</label>
                 <select class="form-select" id="subject" name="subject_id">
-                   <option value="">-- Select Subject --</option>
+                    <option value="">-- Select Subject --</option>
                     @foreach($subjects as $subject)
                         <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                     @endforeach
@@ -19,7 +19,7 @@
             <div id="teachersList"></div>
         </form>
     </div>
-
+    <!-- JavaScript for handling the teacher filter -->
     <script>
         document.getElementById('subject').addEventListener('change', function () {
             const subjectId = this.value;

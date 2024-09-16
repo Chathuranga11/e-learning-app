@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\Subject; 
 use Illuminate\Support\Facades\Hash;
+use App\Models\Purchase;
+use App\Http\Controllers\Lesson;
 
 class TeacherController extends Controller
 {
@@ -50,18 +52,6 @@ class TeacherController extends Controller
     return redirect()->route('login')->with('success', 'Teacher registered successfully. Please log in once activated.');
 }
 
-
-// Filter teachers for the student
-public function filter()
-{
-
-    $teachers = Teacher::all(); 
-    return view('teachers.filter', compact('teachers'));
-
-    $subjects = Subject::all();
-    return view('teachers.filter', compact('subjects'));
-}
-
 public function getTeachers(Request $request)
     {
     $teachers = Teacher::query();
@@ -99,6 +89,57 @@ public function getTeachers(Request $request)
         return redirect()->route('teacher.profile')->with('success', 'Contact number updated successfully.');
     }
 
+
+public function updateLesson(Request $request, $lessonId)
+{
+    // Validate the request
+    $request->validate([
+        'lesson_name' => 'required|string|max:255',
+        'lesson_description' => 'required|string|max:255',
+    ]);
+
+    // Find the lesson and update its name and description
+    $lesson = Lesson::findOrFail($lessonId);
+    $lesson->lesson_name = $request->lesson_name;
+    $lesson->lesson_description = $request->lesson_description;
+    $lesson->save();
+
+    return redirect()->route('teachers.published_lessons')->with('success', 'Lesson updated successfully.');
 }
+
+public function studentsWhoPurchased($lessonId)
+{
+    $purchasedStudents = Purchase::where('lesson_id', $lessonId)->with('student')->get();
+    return view('teachers.purchased-students', compact('purchasedStudents'));
+}
+
+public function showFilterTeacherPage()
+{
+    return view('students.filter'); // Adjust the view path as needed
+}
+
+public function searchTeachers(Request $request)
+{
+    $teachers = Teacher::where('first_name', 'LIKE', '%' . $request->query('query') . '%')
+                        ->orWhere('last_name', 'LIKE', '%' . $request->query('query') . '%')
+                        ->get(['id', 'first_name', 'last_name']);
+
+    return response()->json($teachers);
+}
+
+public function getTeacherLessons(Request $request)
+{
+    // Validate the incoming request
+    $request->validate([
+        'teacher_id' => 'required|exists:teachers,id'
+    ]);
+
+    // Fetch lessons for the selected teacher
+    $lessons = Teacher::find($request->teacher_id)->lessons()->where('lesson_date', '>=', now())->get();
+
+    return response()->json($lessons);
+}
+}
+
 
 
