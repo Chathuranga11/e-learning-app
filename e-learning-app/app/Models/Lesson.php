@@ -22,6 +22,30 @@ class Lesson extends Model
         'subject_id',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Automatically generate the lesson_id in the format LSID### 
+        static::creating(function ($lesson) {
+            $latestLesson = self::orderBy('created_at', 'desc')->first();
+            $lastId = ($latestLesson && $latestLesson->lesson_id) ? intval(substr($latestLesson->lesson_id, 4)) : 0;
+            $lesson->lesson_id = 'LSID' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+        });
+    }
+
+    // Add the primary key as lesson_id for the model
+    protected $primaryKey = 'lesson_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
+
+
     public function purchases()
     {
         return $this->hasMany(Purchase::class, 'lesson_id');

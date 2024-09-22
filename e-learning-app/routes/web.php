@@ -124,7 +124,7 @@ Route::middleware(['auth:teacher'])->group(function () {
     Route::get('/teacher/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
     Route::post('/teacher/lessons', [LessonController::class, 'store'])->name('lessons.store');
     Route::get('/teacher/published-lessons', [LessonController::class, 'index'])->name('lessons.index');
-Route::put('/teacher/published-lessons', [LessonController::class, 'update'])->name('lessons.update');
+    Route::put('/teacher/published-lessons', [LessonController::class, 'update'])->name('lessons.update');
 });
 
 // Student Routes
@@ -153,3 +153,10 @@ Route::get('/lessons/active', [LessonController::class, 'showActiveLessons'])->n
 // Route to handle lesson purchase
 Route::post('/lessons/purchase/{lesson}', [LessonController::class, 'purchase'])->name('lessons.purchase');
 
+// Route to show archived lessons
+Route::get('/teacher/archived-lessons', [TeacherController::class, 'showArchivedLessons'])->name('teacher.archived.lessons');
+
+
+Route::middleware(['auth:teacher'])->group(function () {
+    Route::get('/teacher/archived-lessons', [TeacherController::class, 'showArchivedLessons'])->name('teachers.archived-lessons');
+});

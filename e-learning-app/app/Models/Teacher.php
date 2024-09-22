@@ -26,15 +26,16 @@ class Lesson extends Model
     {
         parent::boot();
 
-        static::creating(function ($teacher) {
-            $latestTeacher = self::orderBy('created_at', 'desc')->first();
-            $lastId = ($latestTeacher && $latestTeacher->teacher_id) ? intval(substr($latestTeacher->teacher_id, 3)) : 0;
-            $teacher->teacher_id = 'THR' . str_pad($lastId + 1, 3, '0', STR_PAD_LEFT);
+        // Automatically generate the lesson_id in the format LSID### 
+        static::creating(function ($lesson) {
+            $latestLesson = self::orderBy('created_at', 'desc')->first();
+            $lastId = ($latestLesson && $latestLesson->lesson_id) ? intval(substr($latestLesson->lesson_id, 4)) : 0;
+            $lesson->lesson_id = 'LSID' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
     }
 
-    // Add the primary key as teacher_id for the model
-    protected $primaryKey = 'teacher_id';
+    // Add the primary key as lesson_id for the model
+    protected $primaryKey = 'lesson_id';
     public $incrementing = false;
     protected $keyType = 'string';
 
@@ -49,15 +50,21 @@ class Lesson extends Model
     }
 }
 
-
 class Teacher extends Authenticatable
 {
     use Notifiable;
 
-    
-        protected $fillable = [
-            'first_name', 'last_name', 'email', 'mobile', 'password', 'subject_id', 'city', 'is_active',
-        ];
+
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'mobile',
+        'password',
+        'subject_id',
+        'city',
+        'is_active',
+    ];
 
 
     protected $hidden = [
@@ -87,4 +94,3 @@ class Subject extends Model
         return $this->hasMany(Lesson::class, 'teacher_id', 'teacher_id');
     }
 }
-

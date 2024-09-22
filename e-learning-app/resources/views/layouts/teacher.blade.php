@@ -118,7 +118,7 @@
                         <a class="nav-link" href="{{ route('go.registry') }}">Go to Registry</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('archive.lessons') }}">Archive Lessons</a>
+                        <a class="nav-link" href="{{ route('teacher.archived.lessons') }}">Archived Lessons</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('teacher.dashboard') }}">Teachers Dashboard</a>
