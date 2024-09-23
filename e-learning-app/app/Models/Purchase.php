@@ -7,22 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
-    use HasFactory;
-
-    protected $fillable = [
-        'purchase_id',
-        'student_id',
-        'lesson_id',
-    ];
-
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
-    }
+    protected $fillable = ['purchase_id', 'student_id', 'lesson_id'];
 
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
     }
-}
 
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+}

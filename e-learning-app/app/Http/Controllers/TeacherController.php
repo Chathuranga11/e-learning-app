@@ -107,11 +107,11 @@ class TeacherController extends Controller
         return redirect()->route('teachers.published_lessons')->with('success', 'Lesson updated successfully.');
     }
 
-    public function studentsWhoPurchased($lessonId)
-    {
-        $purchasedStudents = Purchase::where('lesson_id', $lessonId)->with('student')->get();
-        return view('teachers.purchased-students', compact('purchasedStudents'));
-    }
+    // public function studentsWhoPurchased($lessonId)
+    // {
+    //     $purchasedStudents = Purchase::where('lesson_id', $lessonId)->with('student')->get();
+    //     return view('teachers.purchased-students', compact('purchasedStudents'));
+    // }
 
     public function showFilterTeacherPage()
     {
@@ -157,4 +157,33 @@ class TeacherController extends Controller
 
         return view('teachers.archived-lessons', compact('archivedLessons'));
     }
+
+    public function tutoryTimetable()
+    {
+        // Fetch lessons with a future date and order by date
+        $futureLessons = Lesson::where('lesson_date', '>=', now())
+            ->orderBy('lesson_date', 'asc')
+            ->with('teacher') // Ensure the teacher relationship is loaded
+            ->get();
+
+        // Pass the lessons to the view
+        return view('teachers.future', compact('futureLessons'));
+    }
+    public function logout(Request $request)
+    {
+        auth('teacher')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login'); // Redirect to the teacher login or general login page
+    }
+    public function studentsWhoPurchased($lessonId)
+{
+    $lesson = Lesson::find($lessonId);
+    $students = $lesson->purchases->map(function($purchase) {
+        return $purchase->student;
+    });
+
+    return view('teacher.students-purchased', compact('students', 'lesson'));
+}
 }

@@ -160,3 +160,31 @@ Route::get('/teacher/archived-lessons', [TeacherController::class, 'showArchived
 Route::middleware(['auth:teacher'])->group(function () {
     Route::get('/teacher/archived-lessons', [TeacherController::class, 'showArchivedLessons'])->name('teachers.archived-lessons');
 });
+
+//Route::get('/tutory-time-table', [LessonController::class, 'showFutureLessons'])->name('tutory.time.table');
+Route::get('/tutory-time-table', [TeacherController::class, 'tutoryTimetable'])->name('tutory.time.table');
+
+// logout route for teachers
+Route::post('/teacher/logout', [TeacherController::class, 'logout'])->name('teacher.logout');
+
+// In web.php
+
+Route::middleware('auth:student')->group(function () {
+    Route::get('/students/active-lessons', [StudentController::class, 'activeLessons'])->name('students.active-lessons');
+    Route::get('/students/purchase-lesson/{lesson}', [StudentController::class, 'purchaseLesson'])->name('purchase.lesson');
+});
+
+use App\Http\Controllers\PurchaseController;
+
+// Active lessons
+Route::get('/student/lessons/active', [StudentController::class, 'activeLessons'])->name('lessons.active');
+
+// Purchase confirmation
+Route::get('/lesson/purchase/{lesson}', [PurchaseController::class, 'purchaseConfirmation'])->name('lesson.purchase.confirmation');
+
+// Purchase success
+Route::get('/purchase/success/{lesson}', [PurchaseController::class, 'purchaseSuccess'])->name('purchase.success');
+
+// Purchase fail
+Route::get('/purchase/fail', [PurchaseController::class, 'purchaseFail'])->name('purchase.fail');
+

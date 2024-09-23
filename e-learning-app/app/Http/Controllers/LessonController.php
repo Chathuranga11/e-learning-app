@@ -119,4 +119,19 @@ class LessonController extends Controller
         // Redirect to a success page or show a success message
         return redirect()->back()->with('success', 'Lesson purchased successfully!');
     }
+
+    public function showFutureLessons()
+    {
+        // Fetch lessons with a future date and order by date
+        $futureLessons = Lesson::where('lesson_date', '>=', now())
+            ->orderBy('lesson_date', 'asc')
+            ->with('teacher') // Ensure the teacher relationship is loaded
+            ->get();
+
+        // Pass the lessons to the view
+        return view('teachers.future', compact('futureLessons'));
+    }
+
+
+
 }

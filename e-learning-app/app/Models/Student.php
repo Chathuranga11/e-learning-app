@@ -3,25 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-//class Student extends Model
-//{
-//    use HasFactory;
-
-//    protected $fillable = ['first_name', 'last_name', 'email', 'mobile', 'password', 'school_name', 'city'];
-
-// Example relationship with courses (if exists)
-//  public function courses()
-//  {
-//     return $this->belongsToMany(Course::class);
-// }
-//}
 class Student extends Authenticatable
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'first_name',
@@ -38,4 +25,23 @@ class Student extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Relationship with Purchase model
+     * A student can have many purchases.
+     */
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
+    /**
+     * Get active lessons for the student based on purchases.
+     * This retrieves all lessons the student has purchased.
+     */
+    public function activeLessons()
+    {
+        return $this->hasManyThrough(Lesson::class, Purchase::class, 'student_id', 'id', 'id', 'lesson_id')
+                    ->where('lesson_date', '>=', now());  // Only fetch future lessons
+    }
 }

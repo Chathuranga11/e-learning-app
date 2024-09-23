@@ -4,17 +4,22 @@
 
 @section('content')
     <div class="container mt-4">
-        <h2>My Active Lessons</h2>
-        @foreach($activeLessons as $purchase)
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $purchase->lesson->lesson_name }}</h5>
-                    <p class="card-text">{{ $purchase->lesson->lesson_description }}</p>
-                    <p><strong>Date:</strong> {{ $purchase->lesson->lesson_date }}</p>
-                    <p><strong>Duration:</strong> {{ $purchase->lesson->lesson_duration }}</p>
-                    <p><strong>Fee:</strong> ${{ $purchase->lesson->lesson_fee }}</p>
+        <h2>Active Lessons</h2>
+        <div class="row">
+            @foreach($activeLessons as $lesson)
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $lesson->lesson_name }}</h5>
+                            <p>{{ $lesson->lesson_description }}</p>
+                            <p>Date: {{ $lesson->lesson_date }}</p>
+                            <p>Duration: {{ $lesson->lesson_duration }}</p>
+                            <p>Fee (Rs.): {{ $lesson->lesson_fee }}</p>
+                            <a href="{{ route('lesson.purchase.confirmation', $lesson->id) }}" class="btn btn-primary">Purchase</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 @endsection

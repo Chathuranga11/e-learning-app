@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-custom">Update Contact Number</button>
+                        <button type="submit" class="btn btn-warning btn-custom">Update Contact Number</button>
                     </div>
                 </form>
             </div>

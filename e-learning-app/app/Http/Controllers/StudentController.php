@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+// use App\Http\Controllers\Lesson;
 use App\Http\Controllers\Subject;
-use App\Http\Controllers\Purchase;
+// use App\Http\Controllers\Purchase;
+use App\Models\Lesson;
+use App\Models\Purchases;
 
 class StudentController extends Controller
 {
@@ -58,13 +61,41 @@ class StudentController extends Controller
         return view('students.dashboard', compact('student', 'posts'));
     }
 
-    public function activeLessons()
-{
-    $studentId = auth('student')->user()->id;
-    $activeLessons = Purchase::where('student_id', $studentId)->with('lesson')->get();
+//     public function activeLessons()
+// {
+//     $studentId = auth('student')->user()->id;
+//     $activeLessons = Purchase::where('student_id', $studentId)->with('lesson')->get();
 
+//     return view('students.active-lessons', compact('activeLessons'));
+// }
+
+public function activeLessons()
+{
+    $activeLessons = Lesson::where('lesson_date', '>=', now())->get(); // Fetch active lessons (future lessons)
+    
     return view('students.active-lessons', compact('activeLessons'));
 }
+
+// In StudentController.php
+
+public function purchaseLesson(Lesson $lesson)
+{
+    $student = auth('student')->user(); // Get the logged-in student
+
+    // Check if the student has already purchased the lesson
+    if ($student->purchases()->where('lesson_id', $lesson->id)->exists()) {
+        return redirect()->back()->with('error', 'You have already purchased this lesson.');
+    }
+
+    // Create a new purchase
+    $student->purchases()->create([
+        'lesson_id' => $lesson->id,
+        'purchase_id' => uniqid('PUR')
+    ]);
+
+    return redirect()->route('students.active-lessons')->with('success', 'Lesson purchased successfully!');
+}
+
 
 
 

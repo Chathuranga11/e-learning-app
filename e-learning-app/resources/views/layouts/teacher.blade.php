@@ -9,7 +9,7 @@
         body {
             min-height: 100vh;
             overflow-x: hidden;
-            background-color: #FFCC00; /* Match color of student registration/login */
+            background-color: #FFCC00; 
         }
 
         .sidebar {
@@ -20,11 +20,12 @@
             height: 100%;
             transition: transform 0.3s ease;
             z-index: 1000;
-            transform: translateX(-100%); /* Hide sidebar by default on mobile */
+            transform: translateX(-100%); 
+            overflow-y: auto;
         }
 
         .sidebar.active {
-            transform: translateX(0); /* Show sidebar */
+            transform: translateX(0); 
         }
 
         .close-btn, .open-btn {
@@ -54,7 +55,7 @@
             color: #333;
             font-weight: 600;
             margin-bottom: 10px;
-            border: 1px solid #FFA500; /* Border for sidebar items */
+            border: 1px solid #FFA500; 
             border-radius: 5px;
             padding: 10px;
         }
@@ -73,8 +74,7 @@
 
         @media (min-width: 768px) {
             .sidebar {
-                transform: translateX(0); /* Show sidebar by default on larger screens */
-            }
+                transform: translateX(0); 
 
             .main-content {
                 margin-left: 250px;
@@ -118,7 +118,7 @@
                         <a class="nav-link" href="{{ route('go.registry') }}">Go to Registry</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('teacher.archived.lessons') }}">Archived Lessons</a>
+                        <a class="nav-link" href="{{ route('lessons.index') }}">Archived Lessons</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('teacher.dashboard') }}">Teachers Dashboard</a>
@@ -130,11 +130,13 @@
                         <a class="nav-link" href="{{ route('teacher.profile') }}">My Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                    </li>
+                        <form action="{{ route('teacher.logout') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="nav-link btn btn-link" style="color: #000;">Logout</button>
+                        </form>
                 </ul>
                 <div class="sidebar-footer">
-                    <p>Registered students: 95,000</p> <!-- Update dynamically if needed -->
+                    <p>Registered students: 95,000</p>
                 </div>
             </div>
         </div>

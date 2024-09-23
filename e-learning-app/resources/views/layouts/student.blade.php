@@ -9,7 +9,7 @@
         body {
             min-height: 100vh;
             overflow-x: hidden;
-            background-color: #FFCC00; /* Match color of student registration/login */
+            background-color: #FFCC00; 
         }
 
         .sidebar {
@@ -21,6 +21,7 @@
             transition: transform 0.3s ease;
             z-index: 1000;
             transform: translateX(-100%); /* Hide sidebar by default on mobile */
+            overflow-y: auto;
         }
 
         .sidebar.active {
@@ -112,7 +113,7 @@
                         <a class="nav-link" href="{{ route('timetable') }}">Tutory Time Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('lessons.active') }}">Active Lessons</a>
+                        <a class="nav-link" href="{{ route('students.active-lessons') }}">Active Lessons</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('video.on.demand') }}">Video On Demand</a>
