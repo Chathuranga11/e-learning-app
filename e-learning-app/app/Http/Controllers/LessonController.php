@@ -131,7 +131,12 @@ class LessonController extends Controller
         // Pass the lessons to the view
         return view('teachers.future', compact('futureLessons'));
     }
+    public function join($lessonId)
+    {
+        $lesson = Lesson::findOrFail($lessonId);
 
+        return view('lessons.join', compact('lesson'));
+    }
 
 
 }

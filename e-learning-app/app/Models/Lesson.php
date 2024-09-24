@@ -34,10 +34,9 @@ class Lesson extends Model
         });
     }
 
-    // Add the primary key as lesson_id for the model
-    protected $primaryKey = 'lesson_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public $primaryKey = 'lesson_id'; // This tells Eloquent that 'lesson_id' is the primary key
+    public $incrementing = false; // If lesson_id is not an auto-incrementing field
+    protected $keyType = 'string'; // Set this if lesson_id is a string
 
     public function subject()
     {
@@ -45,10 +44,9 @@ class Lesson extends Model
     }
 
 
-
     public function purchases()
     {
-        return $this->hasMany(Purchase::class, 'lesson_id');
+        return $this->hasMany(Purchase::class, 'lesson_id', 'lesson_id');
     }
 
     // Accessor to format the ID with LSID prefix

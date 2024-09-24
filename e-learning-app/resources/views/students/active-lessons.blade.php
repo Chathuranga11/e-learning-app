@@ -15,7 +15,7 @@
                             <p>Date: {{ $lesson->lesson_date }}</p>
                             <p>Duration: {{ $lesson->lesson_duration }}</p>
                             <p>Fee (Rs.): {{ $lesson->lesson_fee }}</p>
-                            <a href="{{ route('lesson.purchase.confirmation', $lesson->id) }}" class="btn btn-primary">Purchase</a>
+                            <a href="{{ route('lesson.purchase.confirmation', $lesson->lesson_id) }}" class="btn btn-primary">Purchase</a>
                         </div>
                     </div>
                 </div>

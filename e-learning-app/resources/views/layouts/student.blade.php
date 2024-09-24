@@ -20,12 +20,12 @@
             height: 100%;
             transition: transform 0.3s ease;
             z-index: 1000;
-            transform: translateX(-100%); /* Hide sidebar by default on mobile */
+            transform: translateX(-100%); 
             overflow-y: auto;
         }
 
         .sidebar.active {
-            transform: translateX(0); /* Show sidebar */
+            transform: translateX(0); 
         }
 
         .close-btn, .open-btn {
@@ -55,7 +55,7 @@
             color: #333;
             font-weight: 600;
             margin-bottom: 10px;
-            border: 1px solid #FFA500; /* Border for sidebar items */
+            border: 1px solid #FFA500; 
             border-radius: 5px;
             padding: 10px;
         }
@@ -104,7 +104,7 @@
                         <a class="nav-link" href="{{ route('notifications') }}">Notifications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cart') }}">My Cart</a>
+                        <a class="nav-link" href="{{ route('cart.index') }}">My Cart</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('filter.teacher') }}">Filter Teacher</a>

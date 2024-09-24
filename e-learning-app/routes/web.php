@@ -188,3 +188,10 @@ Route::get('/purchase/success/{lesson}', [PurchaseController::class, 'purchaseSu
 // Purchase fail
 Route::get('/purchase/fail', [PurchaseController::class, 'purchaseFail'])->name('purchase.fail');
 
+// Route to display the student's cart (purchased lessons)
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+// Route to join a lesson (dummy example, you'll need to implement the joining functionality)
+Route::get('/lessons/{lesson}/join', [LessonController::class, 'join'])->name('lessons.join');
+
+

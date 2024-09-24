@@ -179,11 +179,18 @@ class TeacherController extends Controller
     }
     public function studentsWhoPurchased($lessonId)
 {
-    $lesson = Lesson::find($lessonId);
-    $students = $lesson->purchases->map(function($purchase) {
-        return $purchase->student;
-    });
+   // Find the lesson by ID
+   $lesson = Lesson::find($lessonId);
 
-    return view('teacher.students-purchased', compact('students', 'lesson'));
+   // Check if the lesson exists
+   if (!$lesson) {
+       return redirect()->back()->with('error', 'Lesson not found.');
+   }
+
+   // Get the purchases for this lesson
+   $purchases = $lesson->purchases()->with('student')->get();
+
+   // Pass the purchases and lesson to the view
+   return view('teachers.purchased-students', compact('purchases', 'lesson'));
 }
 }

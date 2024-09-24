@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\Purchase;
+use App\Http\Controllers\Auth;
 
 class PurchaseController extends Controller
 {
@@ -23,7 +24,7 @@ class PurchaseController extends Controller
         // Create a purchase record
         Purchase::create([
             'student_id' => auth('student')->user()->id, // assuming student is authenticated
-            'lesson_id' => $lesson->id,
+            'lesson_id' => $lesson->lesson_id,
             'purchase_id' => 'PUR' . strtoupper(uniqid()), // Generate unique purchase ID
         ]);
 
@@ -35,4 +36,14 @@ class PurchaseController extends Controller
     {
         return redirect()->route('lessons.active')->with('error', 'Purchase failed.');
     }
+
+    public function index()
+    {
+        // Fetch the purchases for the logged-in student
+        $purchases = Purchase::where('student_id', Auth::id())->with('lesson')->get();
+
+        return view('cart.index', compact('purchases'));
+    }
+
+
 }

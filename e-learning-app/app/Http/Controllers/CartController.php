@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Purchase;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    // Show the cart items for the student
     public function index()
     {
-        $cartItems = auth('student')->user()->cartItems; // Assuming a relationship with cart items
-        return view('cart.index', compact('cartItems'));
+        // Get all purchases for the authenticated student
+        $purchases = Purchase::where('id', Auth::id())->with('lesson')->get();
+
+        return view('cart.index', compact('purchases'));
     }
 }
