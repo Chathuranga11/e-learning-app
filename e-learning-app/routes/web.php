@@ -11,7 +11,6 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\LessonController;
-use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 
@@ -83,7 +82,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 //Route::get('/filter-teacher', [TeacherController::class, 'filter'])->name('filter.teacher');
 Route::get('/tutory-timetable', [TimetableController::class, 'index'])->name('timetable');
 Route::get('/active-lesson', [LessonController::class, 'active'])->name('active.lesson');
-Route::get('/video-on-demand', [VideoController::class, 'index'])->name('video.on.demand');
+Route::get('/video-on-demand', [LessonController::class, 'videoOnDemand'])->name('video.on.demand');
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -193,5 +192,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 // Route to join a lesson (dummy example, you'll need to implement the joining functionality)
 Route::get('/lessons/{lesson}/join', [LessonController::class, 'join'])->name('lessons.join');
+Route::get('/lesson/{id}/watch', [LessonController::class, 'watchLesson'])->name('lesson.watch');
+
 
 

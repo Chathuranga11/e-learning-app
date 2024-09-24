@@ -138,5 +138,39 @@ class LessonController extends Controller
         return view('lessons.join', compact('lesson'));
     }
 
+    public function videoOnDemand()
+{
+    // Fetch future lessons
+    $futureLessons = Lesson::where('lesson_date', '>=', now())->get();
+
+    return view('students.video-on-demand', compact('futureLessons'));
+}
+
+// In app/Http/Controllers/LessonController.php
+
+public function watchLesson($id)
+{
+    // Fetch the lesson details based on the lesson id
+    $lesson = Lesson::findOrFail($id);
+
+    return view('students.watch-video', compact('lesson'));
+}
+
+public function updateLesson(Request $request, $lessonId)
+    {
+        // Validate the request
+        $request->validate([
+            'lesson_name' => 'required|string|max:255',
+            'lesson_description' => 'required|string|max:255',
+        ]);
+
+        // Find the lesson and update its name and description
+        $lesson = Lesson::findOrFail($lessonId);
+        $lesson->lesson_name = $request->lesson_name;
+        $lesson->lesson_description = $request->lesson_description;
+        $lesson->save();
+
+        return redirect()->route('teachers.published_lessons')->with('success', 'Lesson updated successfully.');
+    }
 
 }
