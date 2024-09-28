@@ -41,7 +41,7 @@
             <a href="{{ route('admin.register') }}" class="btn btn-danger btn-custom">Admin</a>
         </div>
         <div class="mt-5">
-            <h4>Registered students <span style="color:red;">xxxxxxxxxx</strong></span></h4>
+            <h4>Registered students <span style="color:red;">8</strong></span></h4>
         </div>
         <div class="footer-text">
             <p>If a teacher has offered a free lesson, you can click the above button to visit the classroom.</p>
